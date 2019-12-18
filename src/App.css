@@ -1,38 +1,61 @@
-.App {
+body{
+  background: #15202b!important;
+}
+.main{
+  margin-top: 5%;
+}
+.navbar-expand{
+  width: 75vw;
+  margin-left: 12.5%;
+}
+.item{
+  width: 100%;
+  background: #343A40;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 16px;
+  min-height: 100px;
+  margin-bottom: 2%;
+  position: relative;
+}
+.item .content{
+  color: #FFFFFF;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+}
+
+.item .user{
+  color: #6C757D;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.item .date{
+  color: #6C757D;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.submit-post{
+  position: absolute;
+  right: 8px;
+  top: 75%;
+}
+
+.form-group{
+  margin-bottom: 55px;
+  position: relative;
+}
+
+.twitt-box{
+  margin-bottom: 4%;
+}
+.spinner-grow{
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  display: block;
+  position: absolute;
+  top: 80px;
+  left: 270px;
 }
