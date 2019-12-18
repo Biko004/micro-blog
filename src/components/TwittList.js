@@ -6,7 +6,7 @@ class TwittList extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            loading: false,
+            loadingTwitts: false,
             twitts: [{form: {content: "BLA BLA", user: "biko", date: 'today'}}]
         }
     }
@@ -16,16 +16,23 @@ class TwittList extends React.Component{
         let twitts = this.state.twitts
         twitts.push({form: newForm})
         this.setState({twitts: twitts})
+        localStorage.setItem('store', JSON.stringify(this.state.twitts))
         // this.setState({ loadingTwitts: false });
+    }
+    componentDidMount(){
+        let localTwitts = JSON.parse(window.localStorage.getItem('store'));
+        if(localTwitts){
+              this.setState({twitts: localTwitts})
+        }
     }
 
     render(){
             let twitts = this.state.twitts
-            console.log(twitts)
+
         return(
             <div>
                 <TwittBox onFormSubmit={ (form)=> this.handleSubmit(form)}/>
-                {(twitts.map((elem, i) =>  <TwittItem key={i} user={elem.form.user} content={elem.form.content} date={elem.form.date}/> ))}
+                {(twitts.map((elem, i) =>  <TwittItem key={i} user={elem.form.user} content={elem.form.content} date={elem.form.date}/> ).reverse())}
 
             </div>
         )
