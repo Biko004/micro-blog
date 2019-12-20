@@ -11,7 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+// import { connect } from "react-redux";
 
 function App() {
   return (
