@@ -14,10 +14,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var firestore = firebase.firestore();
-const collectionRef = firestore.collection("tweets")
+const tweetsCollection = firestore.collection("tweets")
 
 export function getTweets() {
-    return collectionRef
+    return tweetsCollection
         .orderBy('date','desc')
         .limit(10)
         .get()
@@ -25,5 +25,5 @@ export function getTweets() {
 
 
 export function postTweet(tweet) {
-  return collectionRef.add(tweet)
+  return tweetsCollection.add(tweet)
 }
