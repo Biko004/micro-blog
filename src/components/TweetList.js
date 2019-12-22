@@ -6,31 +6,77 @@ import { Spinner } from 'react-bootstrap';
 import { MyContext } from '../context';
 
 
+// const TweetList = () => {
+
+
+//     const [tweets, setTweets] = useState([])
+//     const [loading, setLoading] = useState(false);
+//     const [err, setError] = useState('');
+
+//     useEffect(() => {
+//         const execute = async () => {
+//             try {
+//                 const response = await getTweets();
+//                 const data = (response.data.tweets).sort(function (a, b) {
+//                     return (a.date > b.date) ? -1 : ((a.date < b.date) ? 1 : 0);
+//                 });
+//                 setTweets(data);
+//             } catch (error){
+//                 console.log("error")
+//                 setError("Oh no! Server error! " + error)
+//             } 
+//         }
+//         execute();
+//     }, [])
+
+//     const handleSubmit = (form) => {
+//         setLoading(true);
+//         console.log("1")
+//         const execute = async () =>{
+//             try{
+//                 const response = await postTweet(form);
+//                 setLoading(false);
+//             }catch(error){
+//                 setError("Didn't post for some reason: " + error)
+//                 setLoading(false);
+//             }
+//         }
+//         execute();
+
+//     }
+//     return (
+//         <div className="list-items">
+
+//             <TweetBox className={loading ? 'box-disabled' : ''} onFormSubmit={(form) => handleSubmit(form)} />
+//             <p className="error">{err}</p>
+//             {loading && <Spinner animation="grow" variant="primary" />}
+//             {(tweets.map((elem, i) => <TweetItem key={i} userName={elem.userName} content={elem.content} date={elem.date} />))}
+//         </div>
+//     )
+// }
 
 class TweetList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loadingTweets: false,
-            tweets: [{ content: "BLA BLA", userName: "biko", date: 'today' }],
+            tweets: [],
             onFormSubmit: form => this.handleSubmit(form)
         }
     }
 
 
     getAllTweets() {
-        getTweets().then(response => {
-            let data = (response.data.tweets).sort(function (a, b) {
-                return (a.date > b.date) ? -1 : ((a.date < b.date) ? 1 : 0);
-            });
-            this.setState({ tweets: data })
+        getTweets().then(tweets => {
+            let newTweets=[];
+            tweets.docs.map(obj => newTweets.push(obj.data()));
+            this.setState({ tweets: newTweets });
         })
     }
 
 
     handleSubmit = (form) => {
-        this.setState({ loadingTweets: true })
-        console.log("1")
+        this.setState({ loadingTweets: true });
         const execute = async () => {
             try {
                 const response = await postTweet(form);
@@ -51,7 +97,7 @@ class TweetList extends React.Component {
 
     render() {
         let tweets = this.state.tweets
-        console.log(this.state.tweets)
+
         return (
             <MyContext.Provider value={this.state}>
             <div className="list-items">
